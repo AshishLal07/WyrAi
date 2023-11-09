@@ -1,0 +1,77 @@
+import {useState} from 'react';
+import logo from '../assets/logo.svg';
+import {Link} from 'react-router-dom';
+const Login = () => {
+	const [formData, setFormData] = useState({
+		emailorphone: '',
+		password: '',
+	});
+
+	const handleChange = (e) => {
+		const {name, value} = e.target;
+		setFormData((prevFormData) => ({
+			...prevFormData,
+			[name]: value,
+		}));
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		// Implement the form submission logic here
+		console.log(formData);
+	};
+	return (
+		<>
+			<div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+				<div className="max-w-md w-full space-y-8 shadow-lg border-2 rounded-lg px-4 py-6 bg-white">
+					<div>
+						<img src={logo} alt="" className="m-auto" />
+						<h2 className="mt-6 text-center text-xl font-extrabold text-gray-900">
+							Sign Up
+						</h2>
+					</div>
+					<form className="mt-8 space-y-6 mx-6" onSubmit={handleSubmit}>
+						<input
+							type="text"
+							name="name"
+							className="appearance-none rounded-none relative block w-full  px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+							placeholder="Enter Your email or phone number"
+							value={formData.emailorphone}
+							onChange={handleChange}
+						/>
+
+						<input
+							type="password"
+							name="password"
+							className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+							placeholder="Create Password"
+							value={formData.password}
+							onChange={handleChange}
+						/>
+
+						<p className="text-xs text-[#1B9BEF] text-right">
+							Forget Password?
+						</p>
+						<div>
+							<button
+								type="submit"
+								className="group relative w-1/2 m-auto flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#1b9bef] hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+							>
+								Sign In
+							</button>
+							<p className="text-center text-sm text-gray-500 my-4">
+								Not Register Yet?{' '}
+								<Link to={'/signUp'} className="text-[#1B9BEF]">
+									{' '}
+									Create Account
+								</Link>
+							</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</>
+	);
+};
+
+export default Login;
