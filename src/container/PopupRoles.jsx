@@ -7,47 +7,36 @@ const PopupRoles = () => {
 	const [formData, setFormData] = useState({
 		role: '',
 		description: '',
-		access: {},
-	});
-	// const [check, setCheck] = useState(false);
-	const [data, setData] = useState({
-		PoUpload: false,
-		PoAcesss: false,
-		PoVerify: false,
-		PoUdate: false,
 	});
 
-	console.log(data);
+	const data = ['PoUpload', 'PoAcesss', 'PoVerify', 'PoUdate'];
+
+	const [selectedOptions, setSelectedOptions] = useState([]);
+
+	// console.log(data);
 
 	const handleInputChange = (e) => {
-		console.log(e.target.name);
+		// console.log(e.target.name);
 		const {name, value} = e.target;
 		setFormData({
 			...formData,
 			[name]: value,
 		});
-
+		// console.log(formData);
 		// work left is add all true value of data to access form data
 	};
 	const handleSelectChange = (e) => {
-		// console.log(e.target.name);
 		const {checked, name} = e.target;
-		if (checked) {
-			setData({...data, [name]: true});
-			Object.entries(data).map((key) => {
-				if (key[1] === true) {
-					console.log(key);
-					// setFormData((prev => {...prev,}));
-				}
-			});
-			setFormData({...formData});
-			console.log(formData);
-		} else {
-			setData({...data, [name]: false});
-			// formData.access.filter((item) => item[0] != key[0]);
-		}
 
-		// const {name, value} = e.target;
+		setSelectedOptions((prevSelectedOptions) =>
+			checked
+				? [...prevSelectedOptions, name]
+				: prevSelectedOptions.filter((currentOption) => currentOption !== name)
+		);
+	};
+
+	const handleSubmit = () => {
+		console.log(formData, selectedOptions);
 	};
 
 	return (
@@ -74,12 +63,12 @@ const PopupRoles = () => {
 							</h1>
 							<ul className="flex flex-col gap-[10px]">
 								{/* {.map()} */}
-								{Object.keys(data).map((item, index) => (
+								{data.map((item, index) => (
 									<li key={index} className="flex gap-[5px]">
 										<Checkbox
 											label={item}
 											name={item}
-											check={data}
+											check={selectedOptions}
 											// setCheck={setCheck}
 											setChange={handleSelectChange}
 										/>
@@ -88,7 +77,12 @@ const PopupRoles = () => {
 							</ul>
 						</div>
 					</div>
-					<button className="bg-blue-500 py-[10px] px-[45px]">save</button>
+					<button
+						onClick={() => handleSubmit()}
+						className="bg-blue-500 py-[10px] px-[45px] rounded-md"
+					>
+						save
+					</button>
 				</div>
 			</div>
 		</>

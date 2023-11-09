@@ -6,22 +6,53 @@ import UserCard from '../container/userCard'; //change the name of the file late
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import PopupBranch from '../container/PopupBranch';
+import {userGloabalContext} from '../UserContext';
 
 // import {useEffect, useState} from 'react';
 
 // change the checkbox styles
 
 const UserMgt = () => {
-	// const [branchInfo, setBranchInfo] = useState([]);
-	const branchData = [
-		{location: 'Nsp, New Delhi', branchName: 'WYR.ai'},
-		{location: 'Nsp, New Delhi', branchName: 'WYR.ai'},
-	];
+	const {branchData, branchInfo, handleBranchChange} = userGloabalContext();
+	// const branchData = [
+	// 	{
+	// 		location: 'Nsp, New Delhi',
+	// 		branchName: 'WYR.ai',
+	// 		country: 'India',
+	// 		city: 'Nsp',
+	// 		pincode: '110001',
+	// 	},
+	// 	{
+	// 		location: 'Nsp, New Delhi',
+	// 		branchName: 'WYR.ai',
+	// 		country: 'India',
+	// 		city: 'Nsp',
+	// 		pincode: '110001',
+	// 	},
+	// ];
+	// const [branchInfo, setBranchInfo] = useState({
+	// 	location: '',
+	// 	branchName: '',
+	// 	country: '',
+	// 	city: '',
+	// 	pincode: '',
+	// });
 
 	const [popUp, setPopup] = useState(false);
 	const [checkedItems, setCheckedItems] = useState([]);
 
-	console.log(branchData.length, branchData[0].location);
+	// console.log(branchData.length, branchData[0].location);
+
+	// const handleBranchChange = (e) => {
+	// 	setBranchInfo({...branchInfo, [e.target.name]: e.target.value});
+	// 	console.log(branchInfo);
+	// };
+
+	const handleSubmit = () => {
+		console.log(branchInfo);
+		branchData.push(branchInfo);
+		console.log(branchData);
+	};
 
 	return (
 		<>
@@ -108,7 +139,14 @@ const UserMgt = () => {
 					</div>
 				</div>
 
-				{popUp && <PopupBranch />}
+				{popUp && (
+					<PopupBranch
+						branchInfo={branchInfo}
+						setChange={handleBranchChange}
+						handleSubmit={handleSubmit}
+						setPopup={setPopup}
+					/>
+				)}
 			</div>
 		</>
 	);

@@ -7,9 +7,11 @@ import PopupRoles from './PopupRoles';
 import camera from '../assets/noun-camera-6228850 1.svg';
 import PopupBranch from './PopupBranch';
 import {Link} from 'react-router-dom';
+import {userGloabalContext} from '../UserContext';
 
 const AddUser = () => {
 	// Assuming you want to store the form data in a state
+	const {branchData, branchInfo, handleBranchChange} = userGloabalContext();
 
 	const [formData, setFormData] = useState({
 		name: '',
@@ -52,15 +54,18 @@ const AddUser = () => {
 	};
 	function handleFiles(e) {
 		// Actions to handle the file input change
+
 		const imgFile = e.target.files;
-		setPhotos([...imgFile]);
+		// console.log(imgFile);
+		setPhotos([imgFile]);
 		console.log(photos);
 	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		// Handle the form submission
-		console.log(formData);
+
+		console.log(formData, photos); // photos is object check the files provided get neccessary items according to you
 	};
 
 	return (
@@ -147,16 +152,6 @@ const AddUser = () => {
 							setChange={handleChange}
 							title={'Phone'}
 						/>
-
-						{/* <InputField
-							val={formData.role}
-							name={'role'}
-							setChange={handleChange}
-							title={'Assign Role'}
-						/> */}
-
-						{/* Repeat similar blocks for other input fields */}
-						{/* ... */}
 					</div>
 					<div className="grid grid-cols-2 gap-5 -mx-3 mb-2 ">
 						<DropdownSelect
@@ -189,7 +184,14 @@ const AddUser = () => {
 			</div>
 
 			{popupRole && <PopupRoles />}
-			{popupBranch && <PopupBranch />}
+			{popupBranch && (
+				<PopupBranch
+					branchInfo={branchInfo}
+					setChange={handleBranchChange}
+					handleSubmit={handleSubmit}
+					setPopup={setPopupBranch}
+				/>
+			)}
 		</div>
 	);
 };

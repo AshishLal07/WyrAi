@@ -15,7 +15,7 @@ const Checkbox = ({name, check, label, setChange}) => {
 				id={name}
 			/>
 			<label className="flex items-center gap-2" htmlFor={name}>
-				{check[`${name}`] ? (
+				{check.includes(name) ? (
 					<img src={checked} className="cursor-pointer" alt="checked" />
 				) : (
 					<img src={unchecked} className="cursor-pointer" alt="unchecked" />
@@ -27,7 +27,3 @@ const Checkbox = ({name, check, label, setChange}) => {
 };
 
 export default Checkbox;
-
-//  <div className="cursor-pointer " onClick={() => setCheck(!check)}>
-
-// 			</div>

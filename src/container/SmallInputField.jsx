@@ -1,4 +1,4 @@
-const SmallInputField = () => {
+const SmallInputField = ({name, val, setChange, title}) => {
 	return (
 		<>
 			<div className=" relative w-11/12  px-3 mb-6 md:mb-0">
@@ -7,15 +7,15 @@ const SmallInputField = () => {
 					id="name"
 					type="text"
 					placeholder="Enter the Name of User"
-					// value={val}
-					// onChange={(e) => setChange(e)}
-					// name={name}
+					value={val}
+					onChange={(e) => setChange(e)}
+					name={name}
 				/>
 				<label
 					className="absolute block top-[-26%] text-gray-500 bg-white tracking-tighter left-[10%] py-1 px-3  text-base mb-2"
 					htmlFor="name"
 				>
-					{'test'}
+					{title}
 				</label>
 			</div>
 		</>
