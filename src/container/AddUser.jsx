@@ -6,12 +6,13 @@ import DropdownSelect from './DropdownSelect';
 import PopupRoles from './PopupRoles';
 import camera from '../assets/noun-camera-6228850 1.svg';
 import PopupBranch from './PopupBranch';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {userGloabalContext} from '../UserContext';
 
 const AddUser = () => {
 	// Assuming you want to store the form data in a state
 	const {branchData, branchInfo, handleBranchChange} = userGloabalContext();
+	const navigate = useNavigate();
 
 	const [formData, setFormData] = useState({
 		name: '',
@@ -63,6 +64,30 @@ const AddUser = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		const data = {
+			name: formData.name,
+			employeeId: formData.employeeId,
+			email: formData.email,
+			phone: formData.phone,
+			role: formData.role,
+			officeBranch: formData.officeBranch,
+			profileImagePath: photos,
+		};
+
+		// /api/registerEmployee
+		const resp = await fetch('http://localhost:5000/api/registerEmployee', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		});
+
+		if (resp.ok) {
+			navigate('/user');
+		}
+
 		// Handle the form submission
 
 		console.log(formData, photos); // photos is object check the files provided get neccessary items according to you

@@ -11,6 +11,7 @@ import UserMgt from './pages/UserMgt';
 import AddUser from './container/AddUser';
 import ProductOrder from './pages/ProductOrder';
 import {UserContextProvider} from './UserContext';
+import PoBoard from './pages/PoBoard';
 
 // import PopupRoles from './container/PopupRoles';
 // import PopupBranch from './container/PopupBranch';
@@ -29,7 +30,7 @@ function App() {
 						<Route path="/dashboard" element={<Dashboard />}></Route>
 						<Route path="/user" element={<UserMgt />}></Route>
 						<Route path="/add" element={<AddUser />}></Route>
-						<Route path="/test" element={<ProductOrder />}></Route>
+						<Route path="/test" element={<PoBoard />}></Route>
 					</Route>
 					{/* <Route path="/" element={<Layout />}> */}
 					{/* <Route path="/login" element={<Login />}></Route>

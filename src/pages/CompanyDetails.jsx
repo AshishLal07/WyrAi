@@ -1,6 +1,7 @@
 import logo from '../assets/logo.svg';
 import upload from '../assets/formkit_uploadcloud.svg';
 import UploadFiles from '../container/UploadFiles';
+import {useState} from 'react';
 
 const CompanyDetailsForm = () => {
 	// Placeholder function for form submission
@@ -9,6 +10,8 @@ const CompanyDetailsForm = () => {
 		// Handle the form submission
 		console.log('Form submitted');
 	};
+	const [imgPopup, setImgPopup] = useState(false);
+	const [docPopup, setDocPopup] = useState(false);
 
 	return (
 		<>
@@ -69,6 +72,7 @@ const CompanyDetailsForm = () => {
 							<button
 								type="button"
 								className="flex-1 px-3 py-2 border-dashed border-2 rounded text-gray-500"
+								onClick={() => setDocPopup(true)}
 							>
 								<div className=" ">
 									<img src={upload} alt="cloud" className="m-auto" />
@@ -80,6 +84,7 @@ const CompanyDetailsForm = () => {
 							<button
 								type="button"
 								className="flex-1 px-3 py-2 border-dashed border-2 rounded text-gray-500"
+								onClick={() => setImgPopup(true)}
 							>
 								<div className=" ">
 									<img src={upload} alt="cloud" className="m-auto" />
@@ -97,7 +102,10 @@ const CompanyDetailsForm = () => {
 					</div>
 				</form>
 			</div>
-			<UploadFiles />
+			{docPopup && (
+				<UploadFiles title={'Upload Documents/License/Certification'} />
+			)}
+			{imgPopup && <UploadFiles title={'Upload Company Image'} />}
 		</>
 	);
 };
