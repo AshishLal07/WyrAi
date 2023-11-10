@@ -2,8 +2,12 @@ import {useState} from 'react';
 import InputField from './InputField';
 import TextBox from './TextBox';
 import Checkbox from './Checkbox';
+import {useNavigate} from 'react-router-dom';
+import {userGloabalContext} from '../UserContext';
 
 const PopupRoles = () => {
+	const {fetchRole} = userGloabalContext();
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		role: '',
 		description: '',
@@ -13,8 +17,6 @@ const PopupRoles = () => {
 
 	const [selectedOptions, setSelectedOptions] = useState([]);
 
-	// console.log(data);
-
 	const handleInputChange = (e) => {
 		// console.log(e.target.name);
 		const {name, value} = e.target;
@@ -22,8 +24,6 @@ const PopupRoles = () => {
 			...formData,
 			[name]: value,
 		});
-		// console.log(formData);
-		// work left is add all true value of data to access form data
 	};
 	const handleSelectChange = (e) => {
 		const {checked, name} = e.target;
@@ -35,8 +35,24 @@ const PopupRoles = () => {
 		);
 	};
 
-	const handleSubmit = () => {
-		console.log(formData, selectedOptions);
+	const handleSubmit = async () => {
+		const data = {
+			selectedOptions,
+			formData,
+		};
+
+		const resp = await fetch('http://localhost:5000/api/roles', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({data}),
+		});
+
+		if (resp.ok) {
+			navigate('/user');
+			fetchRole();
+		}
 	};
 
 	return (

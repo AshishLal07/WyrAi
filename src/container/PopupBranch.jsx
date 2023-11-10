@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
+import {userGloabalContext} from '../UserContext';
 import InputField from './InputField';
 import SmallInputField from './SmallInputField';
 
 // eslint-disable-next-line react/prop-types
 const PopupBranch = ({branchInfo, setChange, handleSubmit, setPopup}) => {
+	const {fetchBranch} = userGloabalContext();
 	return (
 		<>
 			<div className=" absolute top-[0%] left-0 bg-[#00000080] h-screen w-screen pt-[100px]">
@@ -22,7 +24,7 @@ const PopupBranch = ({branchInfo, setChange, handleSubmit, setPopup}) => {
 							name={'location'}
 							setChange={setChange}
 							title={'Enter the address of the branch'}
-							val={branchInfo.location}
+							val={branchInfo.address}
 						/>
 					</div>
 					<div className="w-4/5 mx-auto">
@@ -55,6 +57,7 @@ const PopupBranch = ({branchInfo, setChange, handleSubmit, setPopup}) => {
 						className="bg-blue-500 py-[10px] px-[45px] w-[131px] m-auto rounded-md"
 						onClick={() => {
 							handleSubmit();
+							fetchBranch();
 							setPopup(false);
 						}}
 					>

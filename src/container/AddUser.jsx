@@ -3,41 +3,34 @@ import profile from '../assets/userProfile.svg';
 import leftarrow from '../assets/ion_arrow-back-outline.svg';
 import InputField from './InputField';
 import DropdownSelect from './DropdownSelect';
+
 import PopupRoles from './PopupRoles';
 import camera from '../assets/noun-camera-6228850 1.svg';
 import PopupBranch from './PopupBranch';
 import {Link, useNavigate} from 'react-router-dom';
 import {userGloabalContext} from '../UserContext';
+import DropdownSelectRole from './DropdownSelectRole';
 
 const AddUser = () => {
 	// Assuming you want to store the form data in a state
-	const {branchData, branchInfo, handleBranchChange} = userGloabalContext();
+	const {
+		branchInfo,
+		handleBranchChange,
+		formData,
+		setFormData,
+		isEditMode,
+		editData,
+	} = userGloabalContext();
 	const navigate = useNavigate();
 
-	const [formData, setFormData] = useState({
-		name: '',
-		employeeId: '',
-		email: '',
-		phone: '',
-		role: '',
-		officeBranch: '',
-	});
+	// const navigate = useNavigate();
+
 	const [photos, setPhotos] = useState([]);
 
 	const [popupRole, setPopupRole] = useState(false);
 	const [popupBranch, setPopupBranch] = useState(false);
 
 	// console.log(popupBranch, popupRole);
-
-	const branch = [
-		'Create Role',
-		'Senior Buyer',
-		'Admin',
-		'Junior Buyer',
-		'Junior Buyer',
-		'Junior Buyer',
-		'Junior Buyer',
-	];
 
 	const handleChange = (e) => {
 		console.log(e.target.name, e.target.getAttribute('data-name'));
@@ -51,6 +44,7 @@ const AddUser = () => {
 			...formData,
 			[`${name}`]: value,
 		});
+
 		console.log(formData);
 	};
 	function handleFiles(e) {
@@ -64,7 +58,8 @@ const AddUser = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		console.log(isEditMode);
+		const id = editData[0]._id;
 		const data = {
 			name: formData.name,
 			employeeId: formData.employeeId,
@@ -75,6 +70,23 @@ const AddUser = () => {
 			profileImagePath: photos,
 		};
 
+		if (isEditMode) {
+			// /api/registerEmployee
+			const resp = await fetch(
+				`http://localhost:5000/api/updateEmploye/${id}`,
+				{
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data),
+				}
+			);
+			if (resp.ok) {
+				navigate('/user');
+			}
+		}
+
 		// /api/registerEmployee
 		const resp = await fetch('http://localhost:5000/api/registerEmployee', {
 			method: 'POST',
@@ -83,7 +95,6 @@ const AddUser = () => {
 			},
 			body: JSON.stringify(data),
 		});
-
 		if (resp.ok) {
 			navigate('/user');
 		}
@@ -179,8 +190,7 @@ const AddUser = () => {
 						/>
 					</div>
 					<div className="grid grid-cols-2 gap-5 -mx-3 mb-2 ">
-						<DropdownSelect
-							data={branch}
+						<DropdownSelectRole
 							name={'role'}
 							setChange={handleChangeSelect}
 							title={'Assign Role'}
@@ -188,7 +198,6 @@ const AddUser = () => {
 							setPopup={setPopupRole}
 						/>
 						<DropdownSelect
-							data={branch}
 							setChange={handleChangeSelect}
 							name={'officeBranch'}
 							title={'Add Office Branch'}
@@ -202,7 +211,7 @@ const AddUser = () => {
 							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-[10px] px-12 rounded focus:outline-none focus:shadow-outline"
 							type="submit"
 						>
-							Save User
+							{isEditMode ? 'Edit User' : 'Save User'}
 						</button>
 					</div>
 				</form>
