@@ -3,8 +3,8 @@ import select from '../assets/noun-select-all-4671270 1.svg';
 import plus from '../assets/typcn_plus.svg';
 import gps from '../assets/ion_location-outline.svg';
 import UserCard from '../container/userCard'; //change the name of the file later
-import {useEffect, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {useState} from 'react';
+import {Link} from 'react-router-dom';
 import PopupBranch from '../container/PopupBranch';
 import {userGloabalContext} from '../UserContext';
 
@@ -13,49 +13,21 @@ import {userGloabalContext} from '../UserContext';
 // change the checkbox styles
 
 const UserMgt = () => {
-	const {branchData, branchInfo, handleBranchChange} = userGloabalContext();
+	const {
+		branchData,
+		branchInfo,
+		handleBranchChange,
+		handelBranchSubmit,
+		userData,
+		fetchData,
+		edit,
+		checkedItems,
+		setCheckedItems,
+	} = userGloabalContext();
 
-	// const branchData = [
-	// 	{
-	// 		location: 'Nsp, New Delhi',
-	// 		branchName: 'WYR.ai',
-	// 		country: 'India',
-	// 		city: 'Nsp',
-	// 		pincode: '110001',
-	// 	},
-	// 	{
-	// 		location: 'Nsp, New Delhi',
-	// 		branchName: 'WYR.ai',
-	// 		country: 'India',
-	// 		city: 'Nsp',
-	// 		pincode: '110001',
-	// 	},
-	// ];
-	// const [branchInfo, setBranchInfo] = useState({
-	// 	location: '',
-	// 	branchName: '',
-	// 	country: '',
-	// 	city: '',
-	// 	pincode: '',
-	// });
-	const [userData, setUserData] = useState([]);
-
-	useEffect(() => {
-		async function fetchData() {
-			// You can await here
-			// const response = await MyAPI.getData(someId);
-			const resp = await fetch('http://localhost:5000/api/getEmployees');
-			const data = await resp.json();
-
-			setUserData([...data]);
-			console.log(userData);
-			// ...
-		}
-		fetchData();
-	}, []);
+	console.log(branchData[0]);
 
 	const [popUp, setPopup] = useState(false);
-	const [checkedItems, setCheckedItems] = useState([]);
 
 	const handleDelete = async () => {
 		console.log(checkedItems);
@@ -66,9 +38,8 @@ const UserMgt = () => {
 			},
 			body: JSON.stringify({userIds: checkedItems}),
 		});
-		const data = await resp.json();
-		console.log(data);
-		setCheckedItems([]);
+
+		fetchData();
 	};
 
 	// console.log(branchData.length, branchData[0].location);
@@ -78,19 +49,13 @@ const UserMgt = () => {
 	// 	console.log(branchInfo);
 	// };
 
-	const handleSubmit = () => {
-		console.log(branchInfo);
-		branchData.push(branchInfo);
-		console.log(branchData);
-	};
-
 	return (
 		<>
 			<div className="flex flex-col w-11/12 h-full">
 				<header className="mt-8 w-full flex gap-5 justify-end mb-6">
 					<div className="flex gap-5 items-center">
 						{checkedItems.length === 1 && (
-							<button>
+							<button onClick={() => edit(checkedItems)}>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="24"
@@ -185,8 +150,8 @@ const UserMgt = () => {
 					<PopupBranch
 						branchInfo={branchInfo}
 						setChange={handleBranchChange}
-						handleSubmit={handleSubmit}
 						setPopup={setPopup}
+						handleSubmit={handelBranchSubmit}
 					/>
 				)}
 			</div>

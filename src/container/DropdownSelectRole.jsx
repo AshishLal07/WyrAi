@@ -3,12 +3,12 @@ import {useState} from 'react';
 import plus from '../assets/typcn_plus.svg';
 import {userGloabalContext} from '../UserContext';
 
-const DropdownSelect = ({title, name, setChange, popup, setPopup}) => {
-	const {branchData} = userGloabalContext();
+const DropdownSelectRole = ({title, name, setChange, popup, setPopup}) => {
+	const {roleData} = userGloabalContext();
 	const [val, setVal] = useState('');
 	const [visible, setVisible] = useState(false);
-	console.log(branchData);
-	// console.log(data[0], name);
+	console.log(roleData);
+
 	return (
 		<>
 			<div className="flex flex-col">
@@ -42,17 +42,17 @@ const DropdownSelect = ({title, name, setChange, popup, setPopup}) => {
 							<span className="text-[#1B9BEF] text-xs ">{title}</span>
 						</button>
 						<ul className="ml-6 h-[130px] overflow-y-auto cursor-pointer">
-							{branchData.map((item, index) => (
+							{roleData.map((item, index) => (
 								<li
 									key={index}
 									className="py-2"
 									onClick={() => {
-										setChange(name, item.branchName);
-										setVal(`${item.branchName}`);
+										setChange(name, item);
+										setVal(`${item}`);
 										setVisible(!visible);
 									}}
 								>
-									{item.branchName}
+									{item}
 								</li>
 							))}
 						</ul>
@@ -63,7 +63,7 @@ const DropdownSelect = ({title, name, setChange, popup, setPopup}) => {
 	);
 };
 
-export default DropdownSelect;
+export default DropdownSelectRole;
 
 // /* eslint-disable react/prop-types */
 // import {useState} from 'react';
