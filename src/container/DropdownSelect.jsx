@@ -3,52 +3,73 @@ import {useState} from 'react';
 import plus from '../assets/typcn_plus.svg';
 import {userGloabalContext} from '../UserContext';
 
-const DropdownSelect = ({title, name, setChange, popup, setPopup}) => {
+const DropdownSelect = ({
+	popup,
+	setPopup,
+	label,
+	name,
+	value,
+	onChange,
+	error,
+	placeholder,
+	labelColor,
+	labelsize,
+	padding,
+	type,
+	disable,
+}) => {
 	const {branchData} = userGloabalContext();
-	const [val, setVal] = useState('');
 	const [visible, setVisible] = useState(false);
-	console.log(branchData);
 	// console.log(data[0], name);
 	return (
 		<>
 			<div className="flex flex-col">
-				<div className=" relative w-11/12  px-3 mb-6 md:mb-0">
-					<input
-						className={`appearance-none w-full text-start border-2 border-gray-300 rounded box-content  pl-7 px-4 py-4 mb-3 leading-tight focus:outline-none ${
-							val.length === 0 ? 'text-gray-400' : 'text-black'
-						}`}
-						id="name"
-						data-name="role"
-						type="submit"
-						placeholder="Enter the Name of User"
-						value={val.length === 0 ? title : val}
-						onClick={() => setVisible(!visible)}
+				<div className=" relative w-full mb-6 md:mb-0">
+					<div
+						className={`mt-1 indent-2 hover:opacity-95 block w-full  ${
+							padding || 'pl-2 py-4 pr-10'
+						} ${labelColor} 
+					  text-gray-400 text-start border rounded-md shadow-sm focus:outline-none focus:bg-white
+					${
+						error
+							? 'border-red-500 focus:border-red-500'
+							: 'border-gray-400 focus:border-gray-500'
+					}`}
 						name={name}
-					/>
-					<label
-						className="absolute block top-[-26%] text-gray-500 bg-white tracking-tighter left-[10%] py-1 px-3  text-base  $"
-						htmlFor="name"
+						id={name}
+						type={type}
+						placeholder={placeholder}
+						value={value}
+						onClick={() => setVisible(!visible)}
+						disabled={disable || false}
 					>
-						{title}
-					</label>
+						{placeholder}
+					</div>
+					<p
+						className={`block absolute top-[-25%]  left-[8%] md:top-[-26%] md:left-[10%] text-gray-500 ${labelColor} tracking-tighter  py-1 px-3  ${
+							labelsize || 'text-base'
+						} mb-2`}
+					>
+						{label}
+					</p>
 				</div>
 				{visible && (
 					<div className="shadow ">
-						<button
+						<div
 							className="flex justify-center items-center cursor-pointer pl-6 w-full gap-1 py-3 "
 							onClick={() => setPopup(!popup)}
 						>
 							<img src={plus} alt="add" className="w-6 h-6" />
-							<span className="text-[#1B9BEF] text-xs ">{title}</span>
-						</button>
+							<span className="text-[#1B9BEF] text-xs ">{label}</span>
+						</div>
 						<ul className="ml-6 h-[130px] overflow-y-auto cursor-pointer">
 							{branchData.map((item, index) => (
 								<li
 									key={index}
 									className="py-2"
 									onClick={() => {
-										setChange(name, item.branchName);
-										setVal(`${item.branchName}`);
+										onChange(name, item.branchName);
+
 										setVisible(!visible);
 									}}
 								>

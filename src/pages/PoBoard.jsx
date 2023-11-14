@@ -1,14 +1,28 @@
 import {useState} from 'react';
+import {
+	HiOutlineDocumentText,
+	HiOutlineDotsCircleHorizontal,
+	HiOutlineCheckCircle,
+} from 'react-icons/hi';
+import {GrDocumentUpload} from 'react-icons/gr';
 
 const PoBoard = () => {
 	const [selectedFilter, setSelectedFilter] = useState('all');
 
 	const filters = [
-		{name: 'All', value: 'all'},
-		{name: 'Drafts', value: 'drafts'},
-		{name: 'Pending Approval', value: 'pending'},
-		{name: 'Published', value: 'published'},
-		{name: 'Factory Approved', value: 'approved'},
+		{name: 'All', value: 'all', icons: ''},
+		{name: 'Drafts', value: 'drafts', icons: <HiOutlineDocumentText className='' />},
+		{
+			name: 'Pending Approval',
+			value: 'pending',
+			icons: <HiOutlineDotsCircleHorizontal />,
+		},
+		{name: 'Published', value: 'published', icons: <GrDocumentUpload />},
+		{
+			name: 'Factory Approved',
+			value: 'approved',
+			icons: <HiOutlineCheckCircle />,
+		},
 	];
 
 	return (
@@ -51,7 +65,10 @@ const PoBoard = () => {
                         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
 							onClick={() => setSelectedFilter(filter.value)}
 						>
-							{filter.name}
+							<div className="flex gap-2 items-center">
+								{filter.icons}
+								{filter.name}
+							</div>
 						</button>
 					))}
 				</div>

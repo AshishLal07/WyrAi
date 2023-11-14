@@ -10,7 +10,7 @@ const AssignPeople = () => {
 						<InputField
 							name={'name'}
 							//  setChange={}
-
+							disabled
 							title={'Assign People'}
 							val={'val'}
 						/>

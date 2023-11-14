@@ -18,7 +18,6 @@ const PopupRoles = () => {
 	const [selectedOptions, setSelectedOptions] = useState([]);
 
 	const handleInputChange = (e) => {
-		// console.log(e.target.name);
 		const {name, value} = e.target;
 		setFormData({
 			...formData,
@@ -40,6 +39,7 @@ const PopupRoles = () => {
 			selectedOptions,
 			formData,
 		};
+		console.log(data);
 
 		const resp = await fetch('http://localhost:5000/api/roles', {
 			method: 'POST',
@@ -50,7 +50,7 @@ const PopupRoles = () => {
 		});
 
 		if (resp.ok) {
-			navigate('/user');
+			navigate(-1);
 			fetchRole();
 		}
 	};
@@ -60,19 +60,26 @@ const PopupRoles = () => {
 			<div className=" absolute top-[0%] left-[0%] bg-[#00000080] h-screen w-screen pt-[100px]">
 				<div className="w-1/2 h-[624px] m-auto p-4 rounded-3xl bg-white flex flex-col justify-between items-center ">
 					<h1 className="text-2xl mt-4 mb-6">Create Role</h1>
-					<div className="w-full flex flex-col gap-5">
+					<div className="w-full flex flex-col gap-5 ">
 						<InputField
-							name={'role'}
-							setChange={handleInputChange}
-							title={'Name of the Role'}
-							val={formData.role}
+							label="Name of the Role"
+							name="role"
+							type="text"
+							value={formData.role}
+							onChange={handleInputChange}
+							placeholder={'Name of the Role'}
+							labelColor={'bg-white'}
 						/>
-						<TextBox
-							name={'description'}
-							setChange={handleInputChange}
-							title={'Description'}
-							val={formData.description}
-						/>
+
+						<div className="w-[92.5%]">
+							<TextBox
+								name={'description'}
+								setChange={handleInputChange}
+								title={'Description'}
+								val={formData.description}
+							/>
+						</div>
+
 						<div className="ml-[36px]">
 							<h1 className="text-base font-medium mb-[10px] ">
 								Select Access
@@ -95,7 +102,7 @@ const PopupRoles = () => {
 					</div>
 					<button
 						onClick={() => handleSubmit()}
-						className="bg-blue-500 py-[10px] px-[45px] rounded-md"
+						className="bg-blue py-[10px] px-[45px] rounded-md"
 					>
 						save
 					</button>

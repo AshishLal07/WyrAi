@@ -73,7 +73,7 @@ const PopupOtp = ({setPopup, popup, formData}) => {
 					</p>
 					<button
 						type="submit"
-						className="text-white bg-blue-500 px-4 py-2 rounded"
+						className="text-white bg-blue px-4 py-2 rounded"
 					>
 						Verify
 					</button>

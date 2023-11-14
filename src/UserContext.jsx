@@ -8,7 +8,7 @@ const userContext = createContext();
 export const UserContextProvider = ({children}) => {
 	const navigate = useNavigate();
 	const [branchData, setBranchData] = useState([]);
-	const [roleData, setRoleData] = useState([]);
+	// const [roleData, setRoleData] = useState([]);
 	const [userData, setUserData] = useState([]);
 	const [checkedItems, setCheckedItems] = useState([]);
 	const [editData, setEditData] = useState([]);
@@ -32,7 +32,7 @@ export const UserContextProvider = ({children}) => {
 	};
 	useEffect(() => {
 		fetchBranch();
-		fetchRole();
+		// fetchRole();
 		fetchData();
 	}, []);
 
@@ -47,7 +47,16 @@ export const UserContextProvider = ({children}) => {
 		// console.log(userData);
 	}
 
-	// const roleData = [
+	const roleData = [
+		'Create Role',
+		'Senior Buyer',
+		'Admin',
+		'Junior Buyer',
+		'Junior Buyer',
+		'Junior Buyer',
+		'Junior Buyer',
+	];
+	// const branchData = [
 	// 	'Create Role',
 	// 	'Senior Buyer',
 	// 	'Admin',
@@ -88,14 +97,15 @@ export const UserContextProvider = ({children}) => {
 	async function fetchRole() {
 		// You can await here
 		// const response = await MyAPI.getData(someId);
-		const resp = await fetch('http://localhost:5000/api/getrole');
-		const data = await resp.json();
-		data.map((item) => {
-			setEditData([...item]);
-			setRoleData([...roleData, item.role]);
-		});
+		// const resp = await fetch('http://localhost:5000/api/getrole');
+		// const data = await resp.json();
+		// data.map((item) => {
+		// 	setEditData([...item]);
+		// 	setRoleData([...roleData, item.role]);
+		// });
 
-		console.log(roleData);
+		// console.log(roleData);
+		
 	}
 
 	const edit = (e) => {

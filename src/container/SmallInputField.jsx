@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 const SmallInputField = ({name, val, setChange, title}) => {
 	return (
 		<>
-			<div className=" relative w-11/12  px-3 mb-6 md:mb-0">
+			<div className=" relative w-11/12 px-3 mb-6 md:mb-0">
 				<input
 					className="appearance-none w-full  text-gray-700  border-2 border-gray-300 rounded box-content  pl-7 px-4 py-4 mb-3 leading-tight focus:outline-none"
 					id="name"

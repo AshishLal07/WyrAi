@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import {userGloabalContext} from '../UserContext';
 import InputField from './InputField';
-import SmallInputField from './SmallInputField';
 
 // eslint-disable-next-line react/prop-types
 const PopupBranch = ({branchInfo, setChange, handleSubmit, setPopup}) => {
@@ -13,48 +12,63 @@ const PopupBranch = ({branchInfo, setChange, handleSubmit, setPopup}) => {
 					<h1 className="text-2xl mt-4 mb-6 text-center">Add Branch</h1>
 					<div className="w-4/5 mx-auto">
 						<InputField
-							name={'branchName'}
-							setChange={setChange}
-							title={'Branch Name'}
-							val={branchInfo.name}
+							label="Branch Name"
+							name="branchName"
+							type="text"
+							value={branchInfo.name}
+							onChange={setChange}
+							placeholder={'Branch Name'}
+							labelColor={'bg-white'}
 						/>
 					</div>
 					<div className="w-4/5 mx-auto">
 						<InputField
-							name={'location'}
-							setChange={setChange}
-							title={'Enter the address of the branch'}
-							val={branchInfo.address}
+							label="Enter the address of the branch"
+							name="location"
+							type="text"
+							value={branchInfo.address}
+							onChange={setChange}
+							placeholder={'Enter the address of the branch'}
+							labelColor={'bg-white'}
 						/>
 					</div>
 					<div className="w-4/5 mx-auto">
 						<InputField
-							name={'country'}
-							setChange={setChange}
-							title={'Country'}
-							val={branchInfo.country}
+							label="Country"
+							name="country"
+							type="text"
+							value={branchInfo.country}
+							onChange={setChange}
+							placeholder={'Country'}
+							labelColor={'bg-white'}
 						/>
 					</div>
 					<div className=" w-[80%] mx-auto flex justify-center gap-5  ">
 						<div className="flex-1">
-							<SmallInputField
-								name={'city'}
-								setChange={setChange}
-								title={'City'}
-								val={branchInfo.city}
+							<InputField
+								label="City"
+								name="city"
+								type="text"
+								value={branchInfo.city}
+								onChange={setChange}
+								placeholder={'City'}
+								labelColor={'bg-white'}
 							/>
 						</div>
 						<div className="flex-1">
-							<SmallInputField
-								name={'pincode'}
-								setChange={setChange}
-								title={'Pincode'}
-								val={branchInfo.pincode}
+							<InputField
+								label="Pincode"
+								name="pincode"
+								type="text"
+								value={branchInfo.pincode}
+								onChange={setChange}
+								placeholder={'Pincode'}
+								labelColor={'bg-white'}
 							/>
 						</div>
 					</div>
 					<button
-						className="bg-blue-500 py-[10px] px-[45px] w-[131px] m-auto rounded-md"
+						className="bg-blue py-[10px] px-[45px] w-[131px] m-auto rounded-md"
 						onClick={() => {
 							handleSubmit();
 							fetchBranch();

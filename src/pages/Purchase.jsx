@@ -1,6 +1,6 @@
 /** @format */
 
-import React, {useState} from 'react';
+import {useState} from 'react';
 import FilterBlock from '../Components/FiltersBlock';
 import SortFilter from '../Components/SortFilter';
 import {useNavigate} from 'react-router-dom';
@@ -14,18 +14,18 @@ const filters = [
 	},
 	{
 		submenu: [
-			{label: 'Buying Agency'},
+			{label: 'Factory'},
 			{label: 'Option Two'},
 			{label: 'Option Three'},
 		],
 	},
-	{
-		submenu: [
-			{label: 'QC Agency'},
-			{label: 'Option Two'},
-			{label: 'Option Three'},
-		],
-	},
+	// {
+	// 	submenu: [
+	// 		{label: 'QC Agency'},
+	// 		{label: 'Option Two'},
+	// 		{label: 'Option Three'},
+	// 	],
+	// },
 ];
 
 const sortFilter_Opt = [
@@ -51,14 +51,14 @@ const sortFilter_Opt = [
 	},
 ];
 
-const Inspection = () => {
+const Purchase = () => {
 	const [selectedFilter, setSelectedFilter] = useState(filters[0]);
 	const [sortFilter, setSortFilter] = useState(sortFilter_Opt[0]);
 	const navigate = useNavigate();
 
 	function handleAddPage() {
 		try {
-			navigate('/inspection/add');
+			navigate('/purchase/add');
 		} catch (error) {
 			console.log(error);
 		}
@@ -78,7 +78,7 @@ const Inspection = () => {
 						onClick={handleAddPage}
 						className="bg-blue p-3 rounded-md font-bold text-white w-[40vh]"
 					>
-						Schedule Inspection
+						Create Purchase Order
 					</button>
 				</div>
 				<div>
@@ -93,4 +93,4 @@ const Inspection = () => {
 	);
 };
 
-export default Inspection;
+export default Purchase;

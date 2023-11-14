@@ -1,23 +1,47 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line react/prop-types
-const InputField = ({title, val, setChange, name}) => {
+const InputField = ({
+	label,
+	name,
+	value,
+	onChange,
+	error,
+	placeholder,
+	labelColor,
+	labelsize,
+	padding,
+	type,
+	disable,
+	
+}) => {
 	return (
 		<>
-			<div className=" relative w-11/12   px-3 mb-6 md:mb-0">
+			<div className=" relative  mb-4 ">
 				<input
-					className="appearance-none w-full  text-gray-700  border-2 border-gray-300 rounded box-content  pl-7 px-4 py-4 mb-3 leading-tight focus:outline-none"
-					id="name"
-					type="text"
-					placeholder="Enter the Name of User"
-					value={val}
-					onChange={(e) => setChange(e)}
+					className={`mt-1 indent-2 hover:opacity-95 block w-full  ${
+						padding || 'pl-2 py-4 pr-10'
+					} ${labelColor} 
+					 text-gray-900 placeholder-gray-400  border rounded-md shadow-sm focus:outline-none focus:bg-white
+					${
+						error
+							? 'border-red-500 focus:border-red-500'
+							: 'border-gray-400 focus:border-gray-500'
+					}`}
 					name={name}
+					id={name}
+					type={type}
+					placeholder={placeholder}
+					value={value}
+					onChange={onChange}
+					disabled={disable || false}
 				/>
 				<label
-					className="absolute block top-[-26%] text-gray-500 bg-white tracking-tighter left-[10%] py-1 px-3  text-base mb-2"
+					className={`block absolute top-[-25%]  left-[8%] md:top-[-26%] md:left-[10%] text-gray-500 ${labelColor} tracking-tighter  py-1 px-3  ${
+						labelsize || 'text-base'
+					} mb-2`}
 					htmlFor="name"
 				>
-					{title}
+					{label}
 				</label>
 			</div>
 		</>

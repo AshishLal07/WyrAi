@@ -6,7 +6,7 @@ const Layout = () => {
 	return (
 		<div className=" h-screen  bg-gray-100">
 			<Header />
-			<div className="h-[90%] grid grid-cols-[20rem_auto]">
+			<div className="h-[90%] grid grid-cols-[18rem_auto]">
 				<Nav></Nav>
 				<Outlet />
 			</div>

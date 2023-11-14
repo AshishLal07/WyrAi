@@ -7,7 +7,7 @@ const ProductResize = () => {
 	const [collapse, setCollapse] = useState(false);
 	return (
 		<>
-			<div className={` relative bg-gray-100 p-10`}>
+			<div className={` relative flex flex-col bg-gray-100 p-10`}>
 				<div className="flex flex-col gap-5">
 					<div className="flex items-center ">
 						<div className="outline-dashed p-4 flex-0.5 outline-gray-200">

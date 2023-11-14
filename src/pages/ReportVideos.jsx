@@ -3,6 +3,11 @@
 import React, {useState} from 'react';
 import FilterBlock from '../Components/FiltersBlock';
 import SortFilter from '../Components/SortFilter';
+import {
+	MdOutlineCalendarMonth,
+	MdOutlineKeyboardArrowDown,
+	MdOutlineKeyboardArrowUp,
+} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
 
 const filters = [
@@ -51,9 +56,10 @@ const sortFilter_Opt = [
 	},
 ];
 
-const Inspection = () => {
+const ReportVideos = () => {
 	const [selectedFilter, setSelectedFilter] = useState(filters[0]);
 	const [sortFilter, setSortFilter] = useState(sortFilter_Opt[0]);
+	const [toggle, setToggle] = useState(true);
 	const navigate = useNavigate();
 
 	function handleAddPage() {
@@ -75,10 +81,19 @@ const Inspection = () => {
 						/>
 					</div>
 					<button
-						onClick={handleAddPage}
-						className="bg-blue p-3 rounded-md font-bold text-white w-[40vh]"
+						onClick={() => {
+							setToggle(!toggle);
+							handleAddPage;
+						}}
+						className="bg-[#1B9BEF1A] p-3 rounded-md font-bold text-blue border border-blue w-[40vh] flex justify-center items-center gap-4"
 					>
-						Schedule Inspection
+						<MdOutlineCalendarMonth className="text-blue text-2xl" />
+						<span>Today</span>
+						{toggle ? (
+							<MdOutlineKeyboardArrowUp className="text-blue text-2xl" />
+						) : (
+							<MdOutlineKeyboardArrowDown className="text-blue text-2xl" />
+						)}
 					</button>
 				</div>
 				<div>
@@ -89,8 +104,10 @@ const Inspection = () => {
 					/>
 				</div>
 			</div>
+
+            
 		</main>
 	);
 };
 
-export default Inspection;
+export default ReportVideos;

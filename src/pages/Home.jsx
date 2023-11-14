@@ -6,7 +6,12 @@ import QC from '../assets/noun-preview-192680 1.svg';
 
 import ClientOptions from '../container/ClientOptions';
 const Home = () => {
-	const [style, setStyle] = useState(true);
+	const [role, setRole] = useState([
+		{id: 0, name: 'Buyer', icon: Buyer, selected: false},
+		{id: 1, name: 'BuyingAgency', icon: Agency, selected: false},
+		{id: 2, name: 'Factory', icon: factory, selected: false},
+		{id: 3, name: 'QC Agency', icon: QC, selected: false},
+	]);
 	return (
 		<div>
 			<div className=" h-screen w-3/4 m-auto ">
@@ -17,14 +22,17 @@ const Home = () => {
 					</div>
 
 					<div className="container flex flex-wrap justify-between gap-20">
-						<ClientOptions icon={Buyer} style={style}></ClientOptions>
-						<ClientOptions icon={Agency} style={style}></ClientOptions>
-						<ClientOptions icon={factory} style={style}></ClientOptions>
-						<ClientOptions
-							icon={QC}
-							style={style}
-							setStyle={setStyle}
-						></ClientOptions>
+						{role?.length > 0 &&
+							role.map((item) => (
+								<ClientOptions
+									icon={item.icon}
+									role={role}
+									setRole={setRole}
+									selected={item.selected}
+									key={item.id}
+									id={item.id}
+								></ClientOptions>
+							))}
 					</div>
 				</div>
 			</div>

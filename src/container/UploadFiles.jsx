@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {useState} from 'react';
 import upload1 from '../assets/formkit_uploadcloud1.svg';
 import cross from '../assets/typcn_delete-outline.svg';
@@ -33,7 +34,7 @@ const UploadFiles = ({title}) => {
 							<input
 								type="file"
 								className="hidden"
-								onChange={(e) => handleFiles(e)}
+								onChange={(e) => handleFileChange(e)}
 							/>
 
 							<span className="text-2xl font-bold text-blue-500  mt-2">
