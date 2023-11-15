@@ -48,7 +48,7 @@ const PopupOtp = ({setPopup, popup, formData}) => {
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center h-screen bg-gray-200 absolute top-0 w-full bg-[#00000080] z-10">
+		<div className="flex flex-col items-center justify-center h-screen absolute top-0 w-full bg-[#00000080] z-10">
 			<div className="bg-white p-8 rounded shadow-md text-center">
 				<h1 className="text-lg mb-4">Enter OTP</h1>
 				<p className="text-gray-500 mb-4">OTP sent to your registered Email</p>

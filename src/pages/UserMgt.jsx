@@ -33,8 +33,8 @@ const UserMgt = () => {
 
 	const handleDelete = async () => {
 		console.log(checkedItems);
-		const resp = await fetch('http://localhost:5000/api/deleteEmploye', {
-			method: 'DELETE',
+		const resp = await fetch('http://localhost:3000/deleteEmployee', {
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -55,9 +55,12 @@ const UserMgt = () => {
 		<>
 			<div className="flex flex-col w-11/12 h-full">
 				<header className="mt-8 w-full flex gap-5 justify-end mb-6">
-					<div className="flex gap-5 items-center">
+					<div className="flex gap-5 h-full items-center">
 						{checkedItems.length === 1 && (
-							<button onClick={() => edit(checkedItems)}>
+							<button
+								className="bg-white py-[6px] pr-5 pl-4 items-center w-24 flex gap-1 text-xs text-blue font-bold rounded-md border border-blue"
+								onClick={() => edit(checkedItems)}
+							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="24"
@@ -74,7 +77,10 @@ const UserMgt = () => {
 							</button>
 						)}
 						{checkedItems.length >= 1 && (
-							<button onClick={() => handleDelete()}>
+							<button
+								className="bg-[#EE7360] py-[6px] pr-5 pl-4 items-center w-24 flex gap-1 text-xs text-white font-bold rounded-md"
+								onClick={() => handleDelete()}
+							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="24"

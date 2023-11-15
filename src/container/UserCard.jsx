@@ -1,4 +1,5 @@
 // import menu from '../assets/pepicons-pencil_dots-y.svg';
+import profile from '../assets/Ellipse 8.svg';
 
 const userCard = ({check, setCheck, item}) => {
 	function handleBtnCheck(e) {
@@ -27,8 +28,12 @@ const userCard = ({check, setCheck, item}) => {
 				</button> */}
 			</div>
 			<div className=" w-full pl-4 flex gap-2">
-				<div className="w-16 h-16 rounded-full bg-red-500"></div>
-				{/* <img className="" src="path-to-your-image.jpg" alt="Profile face" /> */}
+				{/* <div className=" bg-red-500"></div> */}
+				<img
+					className="w-16 h-16 rounded-full"
+					src={profile}
+					alt="Profile face"
+				/>
 				<div className="flex flex-col justify-between ">
 					<p className="text-gray-500 text-xs">{item.employeeId}</p>
 					<div className="text-gray-500  text-xs ">{item.name}</div>

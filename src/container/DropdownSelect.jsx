@@ -20,7 +20,9 @@ const DropdownSelect = ({
 }) => {
 	const {branchData} = userGloabalContext();
 	const [visible, setVisible] = useState(false);
-	// console.log(data[0], name);
+	const [field, setField] = useState('');
+
+	console.log(branchData);
 	return (
 		<>
 			<div className="flex flex-col">
@@ -43,7 +45,7 @@ const DropdownSelect = ({
 						onClick={() => setVisible(!visible)}
 						disabled={disable || false}
 					>
-						{placeholder}
+						{field || placeholder}
 					</div>
 					<p
 						className={`block absolute top-[-25%]  left-[8%] md:top-[-26%] md:left-[10%] text-gray-500 ${labelColor} tracking-tighter  py-1 px-3  ${
@@ -63,13 +65,13 @@ const DropdownSelect = ({
 							<span className="text-[#1B9BEF] text-xs ">{label}</span>
 						</div>
 						<ul className="ml-6 h-[130px] overflow-y-auto cursor-pointer">
-							{branchData.map((item, index) => (
+							{branchData?.map((item, index) => (
 								<li
 									key={index}
 									className="py-2"
 									onClick={() => {
 										onChange(name, item.branchName);
-
+										setField(`${item.branchName}`);
 										setVisible(!visible);
 									}}
 								>

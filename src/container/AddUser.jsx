@@ -72,17 +72,25 @@ const AddUser = () => {
 
 	// 	console.log(formData);
 	// };
+	console.log();
 	function handleFiles(e) {
 		// Actions to handle the file input change
 
 		const imgFile = e.target.files;
 		// console.log(imgFile);
 		setPhotos([imgFile]);
-		console.log(photos);
 	}
 
 	const handleSubmit = async (values) => {
 		console.log(values);
+		if (photos.length > 0) {
+			const file = photos[0][0];
+		}
+
+		// const data = {
+		// 	values,
+		// 	file,
+		// };
 
 		// const id = editData[0]?._id;
 		// console.log(editData, id);
@@ -114,16 +122,16 @@ const AddUser = () => {
 		// }
 
 		// // /api/registerEmployee
-		// const resp = await fetch('http://localhost:5000/api/registerEmployee', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// 	body: JSON.stringify(data),
-		// });
-		// if (resp.ok) {
-		// 	navigate('/user');
-		// }
+		const resp = await fetch('http://localhost:3000/registerEmployee', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(values),
+		});
+		if (resp.ok) {
+			navigate('/user');
+		}
 
 		// Handle the form submission
 
@@ -154,7 +162,7 @@ const AddUser = () => {
 					</label>
 
 					{/* <input type="file" /> */}
-					<button className="absolute right-0 top-[20%] bg-white py-[6px] pr-5 pl-4 items-center w-24 flex gap-1 text-xs text-[#1B9BEF] font-bold rounded-md border border-[#1B9BEF]">
+					{/* <button className="absolute right-0 top-[20%] bg-white py-[6px] pr-5 pl-4 items-center w-24 flex gap-1 text-xs text-[#1B9BEF] font-bold rounded-md border border-[#1B9BEF]">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="24"
@@ -183,9 +191,7 @@ const AddUser = () => {
 							/>
 						</svg>
 						<span>Delete</span>
-					</button>
-
-					<button></button>
+					</button> */}
 				</div>
 				<form onSubmit={formik.handleSubmit} className="w-full ">
 					<div className="grid grid-cols-2 gap-5 -mx-3 mb-2">
@@ -278,7 +284,7 @@ const AddUser = () => {
 				</form>
 			</div>
 
-			{popupRole && <PopupRoles />}
+			{popupRole && <PopupRoles setPopup={setPopupRole} />}
 			{popupBranch && (
 				<PopupBranch
 					branchInfo={branchInfo}

@@ -6,6 +6,7 @@ import ShipDetails from '../container/ShipDetails';
 import plus from '../assets/typcn_plus.svg';
 
 const ProductOrder = () => {
+	
 	return (
 		<>
 			<div className=" absolute top-[0%] h-screen w-screen bg-white pt-10  ">

@@ -21,6 +21,7 @@ const DropdownSelectRole = ({
 }) => {
 	const {roleData} = userGloabalContext();
 	const [visible, setVisible] = useState(false);
+	const [field, setField] = useState('');
 
 	return (
 		<>
@@ -42,9 +43,8 @@ const DropdownSelectRole = ({
 						placeholder={placeholder}
 						value={value}
 						onClick={() => setVisible(!visible)}
-						disabled={disable || false}
 					>
-						{placeholder}
+						{field || placeholder}
 					</div>
 					<p
 						className={`block absolute top-[-25%]  left-[8%] md:top-[-26%] md:left-[10%] text-gray-500 ${labelColor} tracking-tighter  py-1 px-3  ${
@@ -70,8 +70,8 @@ const DropdownSelectRole = ({
 									className="py-2"
 									onClick={() => {
 										onChange(name, item);
+										setField(`${item}`);
 										setVisible(!visible);
-										
 									}}
 								>
 									{item}

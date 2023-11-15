@@ -5,7 +5,7 @@ import Checkbox from './Checkbox';
 import {useNavigate} from 'react-router-dom';
 import {userGloabalContext} from '../UserContext';
 
-const PopupRoles = () => {
+const PopupRoles = ({setPopup}) => {
 	const {fetchRole} = userGloabalContext();
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ const PopupRoles = () => {
 		};
 		console.log(data);
 
-		const resp = await fetch('http://localhost:5000/api/roles', {
+		const resp = await fetch('http://localhost:3000/role', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -50,7 +50,8 @@ const PopupRoles = () => {
 		});
 
 		if (resp.ok) {
-			navigate(-1);
+			// navigate(-1);
+			setPopup(false);
 			fetchRole();
 		}
 	};
