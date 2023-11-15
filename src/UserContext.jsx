@@ -108,24 +108,27 @@ export const UserContextProvider = ({children}) => {
 
 		console.log(roleData);
 	}
-
+	console.log(formData);
 	const edit = (e) => {
 		console.log(e[0]);
-		// const id = e[0];
-		// userData.forEach((item) => {
-		// 	if (item._id == id) {
-		// 		setEditData([item]);
-		// 		setFormData({
-		// 			name: item.name,
-		// 			email: item.email,
-		// 			employeeId: item.employeeId,
-		// 			officeBranch: item.officeBranch,
-		// 			phone: item.phone,
-		// 		});
-		// 		setIsEditMode(!isEditMode);
-		// 		navigate('/add');
-		// 	}
-		// });
+		const id = e[0];
+		userData.forEach((item) => {
+			if (item._id == id) {
+				console.log(item);
+				setEditData([item]);
+				setFormData({
+					name: item.name,
+					email: item.email,
+					employeeId: item.employeeId,
+					officeBranch: item.officeBranch,
+					phone: item.phone,
+					role: item.role,
+				});
+
+				setIsEditMode(!isEditMode);
+				navigate('/add');
+			}
+		});
 	};
 
 	return (

@@ -22,6 +22,7 @@ const AddUser = () => {
 		setFormData,
 		isEditMode,
 		editData,
+		fetchData,
 	} = userGloabalContext();
 	const navigate = useNavigate();
 
@@ -31,13 +32,21 @@ const AddUser = () => {
 	const [popupRole, setPopupRole] = useState(false);
 	const [popupBranch, setPopupBranch] = useState(false);
 
+	// const initialValues = {
+	// 	name: '',
+	// 	email: '',
+	// 	assignRole: '',
+	// 	employeeID: '',
+	// 	phone: '',
+	// 	addOfficeBranch: '',
+	// };
 	const initialValues = {
-		name: '',
-		email: '',
-		assignRole: '',
-		employeeID: '',
-		phone: '',
-		addOfficeBranch: '',
+		name: formData.name,
+		email: formData.email,
+		assignRole: formData.role,
+		employeeID: formData.employeeId,
+		phone: formData.phone,
+		addOfficeBranch: formData.officeBranch,
 	};
 
 	const userSchema = Yup.object().shape({
@@ -57,7 +66,22 @@ const AddUser = () => {
 		userSchema,
 	});
 
+	// if (isEditMode) {
+	// 	formik.values.email = formData.email;
+	// 	formik.values.name = formData.name;
+	// 	formik.values.phone = formData.phone;
+	// 	formik.values.employeeID = formData.employeeId;
+	// 	formik.values.assignRole = formData.role;
+	// 	formik.values.addOfficeBranch = formData.officeBranch;
+
+	// 	console.log(formik.values.name);
+	// }
 	// const handleChange = (e) => {
+	// 	this.setState({user: {...this.state.user, name: event.target.value}});
+	// 	// Then call Formik's handleChange
+	// 	formikProps.handleChange(event);
+	// };
+
 	// 	console.log(e.target.name, e.target.getAttribute('data-name'));
 	// 	setFormData({...formData, [e.target.name]: e.target.value});
 	// 	console.log(formData);
@@ -104,34 +128,35 @@ const AddUser = () => {
 		// 	profileImagePath: photos,
 		// };
 
-		// if (isEditMode) {
-		// 	// /api/registerEmployee
-		// 	const resp = await fetch(
-		// 		`http://localhost:5000/api/updateEmploye/${id}`,
-		// 		{
-		// 			method: 'PUT',
-		// 			headers: {
-		// 				'Content-Type': 'application/json',
-		// 			},
-		// 			body: JSON.stringify(data),
-		// 		}
-		// 	);
-		// 	if (resp.ok) {
-		// 		navigate('/user');
-		// 	}
-		// }
-
-		// // /api/registerEmployee
-		const resp = await fetch('http://localhost:3000/registerEmployee', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(values),
-		});
-		if (resp.ok) {
-			navigate('/user');
+		if (isEditMode) {
+			// /api/registerEmployee
+			const id = editData[0]?._id;
+			const resp = await fetch(`http://localhost:3000/updateUser/${id}`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(values),
+			});
+			if (resp.ok) {
+				fetchData();
+				navigate('/user');
+			}
+		} else {
+			const resp = await fetch('http://localhost:3000/registerEmployee', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(values),
+			});
+			if (resp.ok) {
+				fetchData();
+				navigate('/user');
+			}
 		}
+
+		// // // /api/registerEmployee
 
 		// Handle the form submission
 

@@ -45,7 +45,7 @@ const DropdownSelect = ({
 						onClick={() => setVisible(!visible)}
 						disabled={disable || false}
 					>
-						{field || placeholder}
+						{value || field || placeholder}
 					</div>
 					<p
 						className={`block absolute top-[-25%]  left-[8%] md:top-[-26%] md:left-[10%] text-gray-500 ${labelColor} tracking-tighter  py-1 px-3  ${

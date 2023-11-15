@@ -22,7 +22,7 @@ const DropdownSelectRole = ({
 	const {roleData} = userGloabalContext();
 	const [visible, setVisible] = useState(false);
 	const [field, setField] = useState('');
-
+	console.log(roleData);
 	return (
 		<>
 			<div className="flex flex-col">
@@ -44,7 +44,7 @@ const DropdownSelectRole = ({
 						value={value}
 						onClick={() => setVisible(!visible)}
 					>
-						{field || placeholder}
+						{value || field || placeholder}
 					</div>
 					<p
 						className={`block absolute top-[-25%]  left-[8%] md:top-[-26%] md:left-[10%] text-gray-500 ${labelColor} tracking-tighter  py-1 px-3  ${

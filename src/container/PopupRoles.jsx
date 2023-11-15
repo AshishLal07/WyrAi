@@ -2,12 +2,12 @@ import {useState} from 'react';
 import InputField from './InputField';
 import TextBox from './TextBox';
 import Checkbox from './Checkbox';
-import {useNavigate} from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
 import {userGloabalContext} from '../UserContext';
 
 const PopupRoles = ({setPopup}) => {
 	const {fetchRole} = userGloabalContext();
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		role: '',
 		description: '',
