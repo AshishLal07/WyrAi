@@ -12,8 +12,8 @@ const InputField = ({
 	padding,
 	type,
 	disable,
-	
 }) => {
+	console.log(error);
 	return (
 		<>
 			<div className=" relative  mb-4 ">
@@ -43,6 +43,7 @@ const InputField = ({
 				>
 					{label}
 				</label>
+				{error && <p className="text-red-500 text-xs pl-6 ">{error}</p>}
 			</div>
 		</>
 	);

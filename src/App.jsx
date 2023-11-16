@@ -21,6 +21,8 @@ import Purchase from './pages/Purchase';
 import PurchaseOrder from './Components/PurchaseOrder';
 import Report from './container/Report';
 import ReportVideos from './pages/ReportVideos';
+import Menu from './container/Menu';
+import TestPo from './pages/TestPo';
 
 function App() {
 	return (
@@ -37,10 +39,12 @@ function App() {
 						<Route path="/user" element={<UserMgt />}></Route>
 						<Route path="/add" element={<AddUser />}></Route>
 						<Route path="/purchase" element={<Purchase />}></Route>
-						<Route path="/purchase/add" element={<PurchaseOrder />}></Route>
+						<Route path="/purchase/add" element={<TestPo />}></Route>
 						<Route path="/inspection" element={<Inspection />}></Route>
 						<Route path="/inspection/add" element={<InspectionForm />}></Route>
-						<Route path="/test" element={<Report />}></Route>
+						{/* <Route path="/test" element={<Report />}></Route> */}
+						<Route path="/test" element={<Menu />}></Route>
+
 						<Route path="/reports" element={<ReportVideos />}></Route>
 					</Route>
 					{/* <Route path="/" element={<Layout />}> */}

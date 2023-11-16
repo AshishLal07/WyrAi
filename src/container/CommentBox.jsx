@@ -9,7 +9,7 @@ import {MdModeEdit} from 'react-icons/md';
 import {AiFillDelete} from 'react-icons/ai';
 import {RxCrossCircled} from 'react-icons/rx';
 
-const CommentBox = ({setTogglePopup, move}) => {
+const CommentBox = ({comments, setComments, setTogglePopup, move}) => {
 	const [commentsData, setCommentsData] = useState([
 		// Initially, the comments data
 		{
@@ -18,7 +18,8 @@ const CommentBox = ({setTogglePopup, move}) => {
 		},
 		{id: 2, text: 'Another example comment text'},
 	]);
-	const [comments, setComments] = useState([]); // this will store new Comment to send backend
+
+	// const [comments, setComments] = useState([]); // this will store array of comments  to send backend
 
 	const initialValues = {comment: '', editingId: null};
 
@@ -33,6 +34,7 @@ const CommentBox = ({setTogglePopup, move}) => {
 		onSubmit: (values) => handleSubmit(values),
 		validationSchema,
 	});
+	console.log(comments);
 
 	async function handleSubmit(values) {
 		try {
@@ -49,6 +51,7 @@ const CommentBox = ({setTogglePopup, move}) => {
 				setComments([...comments, values.comment]);
 			}
 			console.log(comments, commentsData);
+			formik.setFieldValue('comment', '');
 		} catch (error) {
 			console.error(error);
 		}

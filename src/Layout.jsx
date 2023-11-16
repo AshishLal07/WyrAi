@@ -5,10 +5,12 @@ import Nav from './container/Nav';
 const Layout = () => {
 	return (
 		<div className=" h-screen  bg-gray-100">
-			<Header />
-			<div className="h-[90%] grid grid-cols-[18rem_auto]">
+			<div className="h-[100%] grid grid-cols-[20rem_auto]">
 				<Nav></Nav>
-				<Outlet />
+				<div className="flex flex-col">
+					<Header />
+					<Outlet />
+				</div>
 			</div>
 		</div>
 	);

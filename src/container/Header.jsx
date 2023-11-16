@@ -3,23 +3,14 @@ import help from '../assets/noun-help-1459308.svg';
 import notify from '../assets/noun-notification-1040085 (1) 1.svg';
 import setting from '../assets/noun-setting-1835295 1.svg';
 import search from '../assets/Search.svg';
-import logo from '../assets/logo.svg';
 
 const Header = () => {
 	return (
 		<header className="bg-gray-100  ">
 			<div className="max-w-7xl h-20 mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="flex justify-between items-center pt-2 md:justify-start md:space-x-10">
-					<div className="flex flex-0.5 justify-start lg:w-0 lg:flex-1">
-						<a href="#">
-							{/* Assume your logo is text-based */}
-							<span className="text-xl font-semibold text-gray-700">
-								<img src={logo} alt="" />
-							</span>
-						</a>
-					</div>
-					<div className="flex-1 justify-center hidden md:flex">
-						<div className="w-full">
+				<div className="grid grid-cols-[1fr_1fr] items-center pt-2 md:justify-start md:space-x-10">
+					<div className="w-full">
+						<div className="w-4/5 m-auto">
 							<label htmlFor="search" className="sr-only">
 								Search
 							</label>
@@ -37,18 +28,21 @@ const Header = () => {
 							</div>
 						</div>
 					</div>
-					<div className="flex-1 flex items-center justify-end lg:w-0">
+					<div className=" flex items-center justify-end ">
 						<Link href="#" className="text-gray-600 hover:text-gray-900">
 							{/* <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" /> */}
-							<img src={notify} alt="help" />
+							<img src={notify} alt="help" className="block" />
 						</Link>
 						<Link href="#" className="ml-6 text-gray-600 hover:text-gray-900">
 							{/* <UserIcon className="h-6 w-6" aria-hidden="true" /> */}
 							<img src={setting} alt="help" />
 						</Link>
-						<Link href="#" className="ml-6 text-gray-600 hover:text-gray-900">
+						<Link
+							href="#"
+							className="ml-6 inline-block h-8 w-8 text-gray-600 hover:text-gray-900"
+						>
 							{/* <BellIcon className="h-6 w-6" aria-hidden="true" /> */}
-							<img src={help} alt="help" />
+							<img src={help} alt="help" className="" />
 						</Link>
 						<Link href="#" className=" ml-6 text-gray-600 hover:text-gray-900">
 							{/* Your Profile/Sign In Icon */}

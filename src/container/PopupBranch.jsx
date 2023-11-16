@@ -69,7 +69,7 @@ const PopupBranch = ({branchInfo, setChange, handleSubmit, setPopup}) => {
 						</div>
 					</div>
 					<button
-						className="bg-blue py-[10px] px-[45px] w-[131px] m-auto rounded-md"
+						className="bg-blue py-[10px] px-[45px] w-[131px] text-white m-auto rounded-md"
 						onClick={() => {
 							handleSubmit();
 							fetchBranch();

@@ -55,9 +55,9 @@ const DropdownSelectRole = ({
 					</p>
 				</div>
 				{visible && (
-					<div className="shadow ">
+					<div className="shadow mt-2">
 						<button
-							className="flex justify-center items-center cursor-pointer pl-6 w-full gap-1 py-3 "
+							className="flex justify-start items-center cursor-pointer pl-6 w-full gap-1 py-3 outline-none "
 							onClick={() => setPopup(!popup)}
 						>
 							<img src={plus} alt="add" className="w-6 h-6" />

@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import {useState} from 'react';
 import InputField from './InputField';
 import upload from '../assets/formkit_uploadcloud1.svg';
 import comment from '../assets/noun-add-comment-5035165 1.svg';
@@ -11,19 +11,33 @@ import * as Yup from 'yup';
 
 // import DropZone from '../Components/DropZone';
 import CommentBox from './CommentBox';
-import UploadImages from './UploadImages';
+import {userGloabalContext} from '../UserContext';
+// import UploadImages from './UploadImages';
 
 const Products = () => {
 	const [collapse, setCollapse] = useState(false);
 	const [togglePopup, setTogglePopup] = useState(false);
-	const mySectionRef = useRef(null);
+	const {productList, setProductList, comments, setComments} =
+		userGloabalContext();
+	// console.log(setProductList);
+	// const [comments, setComments] = useState([]);
 
-	const scrollToSection = () => {
-		console.log(mySectionRef.current);
-		if (mySectionRef.current) {
-			mySectionRef.current.scrollIntoView({behavior: 'smooth'});
-		}
-	};
+	// const [productsList, setProductList] = useState({
+	// 	styleId: '',
+	// 	styleName: '',
+	// 	quantity: '',
+	// 	color: '',
+	// 	weight: '',
+	// 	weightTolerance: '',
+	// 	length: '',
+	// 	lengthTolerance: '',
+	// 	width: '',
+	// 	widthTolerance: '',
+	// 	height: '',
+	// 	heightTolerance: '',
+	// 	aql: '',
+	// 	// comments: '', //this can have many comments so, when sent as Array of comments
+	// });
 
 	const validationSchema = Yup.object().shape({
 		styleId: Yup.string().required('Style ID is required'),
@@ -66,7 +80,7 @@ const Products = () => {
 		height: '',
 		heightTolerance: '',
 		aql: '',
-		comments: '', //this can have many comments so, when sent as Array of comments
+		// comments: '', //this can have many comments so, when sent as Array of comments
 	};
 	const formik = useFormik({
 		initialValues,
@@ -81,6 +95,14 @@ const Products = () => {
 			console.error(error);
 		}
 	}
+	const handleChange = (e) => {
+		console.log('test');
+		const {name, value} = e.target;
+		console.log(name, value);
+		setProductList({...productList, [name]: value});
+		formik.handleChange(e);
+	};
+	console.log(productList);
 
 	return (
 		<>
@@ -117,7 +139,7 @@ const Products = () => {
 											name="styleId"
 											type="text"
 											value={formik.values.styleId}
-											onChange={formik.handleChange}
+											onChange={handleChange}
 											onBlur={formik.handleBlur}
 											error={formik.touched.styleId && formik.errors.styleId}
 											placeholder={'ST ED BC 3220 W'}
@@ -130,7 +152,7 @@ const Products = () => {
 											name={'styleName'}
 											type="text"
 											value={formik.values.styleName}
-											onChange={formik.handleChange}
+											onChange={handleChange}
 											onBlur={formik.handleBlur}
 											error={
 												formik.touched.styleName && formik.errors.styleName
@@ -145,7 +167,7 @@ const Products = () => {
 											name={'quantity'}
 											type="text"
 											value={formik.values.quantity}
-											onChange={formik.handleChange}
+											onChange={handleChange}
 											onBlur={formik.handleBlur}
 											error={formik.touched.quantity && formik.errors.quantity}
 											placeholder={'600'}
@@ -158,7 +180,7 @@ const Products = () => {
 											name={'color'}
 											type="text"
 											value={formik.values.color}
-											onChange={formik.handleChange}
+											onChange={handleChange}
 											onBlur={formik.handleBlur}
 											error={formik.touched.color && formik.errors.color}
 											placeholder={'Nat 75/25'}
@@ -174,7 +196,7 @@ const Products = () => {
 										label={'Weight'}
 										type="text"
 										value={formik.values.weight}
-										onChange={formik.handleChange}
+										onChange={handleChange}
 										onBlur={formik.handleBlur}
 										error={formik.touched.weight && formik.errors.weight}
 										placeholder={'500GMS'}
@@ -187,7 +209,7 @@ const Products = () => {
 										label={'WeightTolerance'}
 										type="text"
 										value={formik.values.weightTolerance}
-										onChange={formik.handleChange}
+										onChange={handleChange}
 										onBlur={formik.handleBlur}
 										error={
 											formik.touched.weightTolerance &&
@@ -203,7 +225,7 @@ const Products = () => {
 										label={'Length'}
 										type="text"
 										value={formik.values.length}
-										onChange={formik.handleChange}
+										onChange={handleChange}
 										onBlur={formik.handleBlur}
 										error={formik.touched.length && formik.errors.length}
 										placeholder={'2.5'}
@@ -216,7 +238,7 @@ const Products = () => {
 										label={'Length Tolerance'}
 										type="text"
 										value={formik.values.lengthTolerance}
-										onChange={formik.handleChange}
+										onChange={handleChange}
 										onBlur={formik.handleBlur}
 										error={
 											formik.touched.lengthTolerance &&
@@ -232,7 +254,7 @@ const Products = () => {
 										label={'Width'}
 										type="text"
 										value={formik.values.width}
-										onChange={formik.handleChange}
+										onChange={handleChange}
 										onBlur={formik.handleBlur}
 										error={formik.touched.width && formik.errors.width}
 										placeholder={'2.5'}
@@ -245,7 +267,7 @@ const Products = () => {
 										label={'Width Tolerance'}
 										type="text"
 										value={formik.values.widthTolerance}
-										onChange={formik.handleChange}
+										onChange={handleChange}
 										onBlur={formik.handleBlur}
 										error={
 											formik.touched.widthTolerance &&
@@ -261,7 +283,7 @@ const Products = () => {
 										label={'Height'}
 										type="text"
 										value={formik.values.height}
-										onChange={formik.handleChange}
+										onChange={handleChange}
 										onBlur={formik.handleBlur}
 										error={formik.touched.height && formik.errors.height}
 										placeholder={'2.5'}
@@ -274,7 +296,7 @@ const Products = () => {
 										label={'Height Tolerance'}
 										type="text"
 										value={formik.values.heightTolerance}
-										onChange={formik.handleChange}
+										onChange={handleChange}
 										onBlur={formik.handleBlur}
 										error={
 											formik.touched.heightTolerance &&
@@ -293,7 +315,7 @@ const Products = () => {
 										label={'AQL'}
 										type="text"
 										value={formik.values.aql}
-										onChange={formik.handleChange}
+										onChange={handleChange}
 										onBlur={formik.handleBlur}
 										error={formik.touched.aql && formik.errors.aql}
 										placeholder={'1.6'}
@@ -316,22 +338,22 @@ const Products = () => {
 										</p>
 									</div>
 								</div>
-								<button
+								<div
 									className="flex md:flex-none justify-center items-center cursor-pointer  gap-1 pb-6 "
 									onClick={() => {
 										setTogglePopup(true);
-										scrollToSection;
 									}}
 								>
 									<img src={comment} alt="add" className="w-6 h-6" />
 									<span className="text-[#1B9BEF] text-sm font-bold">
 										{'Comments'}
 									</span>
-								</button>
+								</div>
 
 								{togglePopup && (
 									<CommentBox
-										move={mySectionRef}
+										comments={comments}
+										setComments={setComments}
 										setTogglePopup={setTogglePopup}
 									/>
 								)}
@@ -370,7 +392,7 @@ const Products = () => {
 											name="styleId"
 											type="text"
 											value={formik.values.styleId}
-											onChange={formik.handleChange}
+											onChange={handleChange}
 											onBlur={formik.handleBlur}
 											error={formik.touched.styleId && formik.errors.styleId}
 											placeholder={'ST ED BC 3220 W'}
@@ -383,7 +405,7 @@ const Products = () => {
 											name={'styleName'}
 											type="text"
 											value={formik.values.styleName}
-											onChange={formik.handleChange}
+											onChange={handleChange}
 											onBlur={formik.handleBlur}
 											error={
 												formik.touched.styleName && formik.errors.styleName

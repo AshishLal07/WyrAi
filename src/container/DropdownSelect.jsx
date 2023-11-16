@@ -21,11 +21,11 @@ const DropdownSelect = ({
 	const {branchData} = userGloabalContext();
 	const [visible, setVisible] = useState(false);
 	const [field, setField] = useState('');
-
+	console.log(error);
 	console.log(branchData);
 	return (
 		<>
-			<div className="flex flex-col">
+			<div className="flex flex-col ">
 				<div className=" relative w-full mb-6 md:mb-0">
 					<div
 						className={`mt-1 indent-2 hover:opacity-95 block w-full  ${
@@ -56,9 +56,9 @@ const DropdownSelect = ({
 					</p>
 				</div>
 				{visible && (
-					<div className="shadow ">
+					<div className="shadow mt-2 ">
 						<div
-							className="flex justify-center items-center cursor-pointer pl-6 w-full gap-1 py-3 "
+							className="flex justify-start items-center cursor-pointer pl-6 w-full gap-1 py-3 "
 							onClick={() => setPopup(!popup)}
 						>
 							<img src={plus} alt="add" className="w-6 h-6" />

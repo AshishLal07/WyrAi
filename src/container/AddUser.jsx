@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import profile from '../assets/userProfile.svg';
@@ -20,6 +20,8 @@ const AddUser = () => {
 		handleBranchChange,
 		formData,
 		setFormData,
+		clearFieldData,
+		setIsEditMode,
 		isEditMode,
 		editData,
 		fetchData,
@@ -31,6 +33,23 @@ const AddUser = () => {
 	const [photos, setPhotos] = useState([]);
 	const [popupRole, setPopupRole] = useState(false);
 	const [popupBranch, setPopupBranch] = useState(false);
+
+	const handleEscKeyPress = (event) => {
+		if (event.key === 'Escape') {
+			// Do something when the Esc key is pressed
+			setPopupBranch(false);
+			setPopupRole(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('keydown', handleEscKeyPress);
+
+		// Cleanup: remove event listener when the component unmounts
+		return () => {
+			document.removeEventListener('keydown', handleEscKeyPress);
+		};
+	}, []); // The empty dependency array ensures that the effect runs only once when the component mounts
 
 	// const initialValues = {
 	// 	name: '',
@@ -57,13 +76,13 @@ const AddUser = () => {
 		phone: Yup.string()
 			.matches(/^[0-9]+$/, 'Phone number is not valid')
 			.required('Phone is required'),
-		addOfficeBranch: Yup.string(),
+		addOfficeBranch: Yup.string().required('Branch is Required'),
 	});
 
 	const formik = useFormik({
 		initialValues,
 		onSubmit: (values) => handleSubmit(values),
-		userSchema,
+		validationSchema: userSchema,
 	});
 
 	// if (isEditMode) {
@@ -96,7 +115,7 @@ const AddUser = () => {
 
 	// 	console.log(formData);
 	// };
-	console.log();
+
 	function handleFiles(e) {
 		// Actions to handle the file input change
 
@@ -110,12 +129,6 @@ const AddUser = () => {
 		if (photos.length > 0) {
 			const file = photos[0][0];
 		}
-
-		// const data = {
-		// 	values,
-		// 	file,
-		// };
-
 		// const id = editData[0]?._id;
 		// console.log(editData, id);
 		// const data = {
@@ -140,6 +153,8 @@ const AddUser = () => {
 			});
 			if (resp.ok) {
 				fetchData();
+				setIsEditMode(!isEditMode);
+				clearFieldData();
 				navigate('/user');
 			}
 		} else {
@@ -166,7 +181,7 @@ const AddUser = () => {
 	return (
 		<div className=" rounded mb-4 flex flex-col w-[80%] ml-5 mr-1 bg-gray-100 overflow-hidden">
 			<div className="flex gap-1 mb-3 ">
-				<Link to={'/user'}>
+				<Link to={'/user'} onClick={clearFieldData}>
 					<img src={leftarrow} className="cursor-pointer" alt="" />
 				</Link>
 				<h1 className="text-xl">Add User</h1>

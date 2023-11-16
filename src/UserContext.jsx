@@ -23,6 +23,13 @@ export const UserContextProvider = ({children}) => {
 		officeBranch: '',
 	});
 
+	const clearFieldData = () => {
+		const clearedData = Object.fromEntries(
+			Object.keys(formData).map((key) => [key, ''])
+		);
+		setFormData(clearedData);
+	};
+
 	const fetchBranch = async () => {
 		const resp = await fetch('http://localhost:3000/getbranch');
 		const data = await resp.json();
@@ -109,6 +116,7 @@ export const UserContextProvider = ({children}) => {
 		console.log(roleData);
 	}
 	console.log(formData);
+
 	const edit = (e) => {
 		console.log(e[0]);
 		const id = e[0];
@@ -124,12 +132,33 @@ export const UserContextProvider = ({children}) => {
 					phone: item.phone,
 					role: item.role,
 				});
-
+				setCheckedItems([]);
 				setIsEditMode(!isEditMode);
 				navigate('/add');
 			}
 		});
 	};
+	console.log(checkedItems, isEditMode);
+
+	// PurchaseOrder
+	const [comments, setComments] = useState([]);
+	const [productList, setProductList] = useState({
+		styleId: '',
+		styleName: '',
+		quantity: '',
+		color: '',
+		weight: '',
+		weightTolerance: '',
+		length: '',
+		lengthTolerance: '',
+		width: '',
+		widthTolerance: '',
+		height: '',
+		heightTolerance: '',
+		aql: '',
+		// comments: '', //this can have many comments so, when sent as Array of comments
+	});
+	// console.log(setProductList);
 
 	return (
 		<>
@@ -143,6 +172,11 @@ export const UserContextProvider = ({children}) => {
 					editData,
 					formData,
 					isEditMode,
+					comments,
+					productList,
+					clearFieldData,
+					setProductList,
+					setComments,
 					setIsEditMode,
 					setFormData,
 					setEditData,

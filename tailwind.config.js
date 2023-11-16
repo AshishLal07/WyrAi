@@ -15,7 +15,8 @@ export default {
         darkGray: "#666666",
         lightGray: "#999999",
         slimeGray:"#F7F7F7",
-        transparent:'#00000080'
+        transparent:'#00000080',
+        orange:'#EE7360'
       },
     },
   },

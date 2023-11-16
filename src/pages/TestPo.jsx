@@ -30,14 +30,16 @@ import img from '../assets/sara-kurfess-ltE8bDLjX9E-unsplash.jpeg';
  */
 
 function TestPo() {
-	const [packingListFiles, setPackingListFiles] = useState(null);
-	const [inspectionDate, setInspectionDate] = useState(null);
+	const [PurchaseOrderFiles, SetPurchaseOrderFiles] = useState(null);
+	// const [inspectionDate, setInspectionDate] = useState(null);
+	// const [ProductOrders, setProductOrders] = useState();
 	const [showPurchaseOrder, setShowPurchaseOrder] = useState(false);
 	const photos = [{title: 'image', img}];
 
-	console.log(packingListFiles, showPurchaseOrder);
+	// console.log(PurchaseOrderFiles, showPurchaseOrder);
 
 	const navigate = useNavigate();
+
 	const initialValues = {
 		nameOfBuyer: '',
 		addOfBuyer: '',
@@ -71,31 +73,34 @@ function TestPo() {
 		validationSchema,
 	});
 
-	async function handleSubmit(values) {
+	// async function handleSubmit(values) {
+
+	// }
+	const handleSubmit = (values) => {
 		try {
 			console.log(values);
 		} catch (error) {
 			console.error(error);
 		}
-	}
+	};
 
-	const addSlotOfProduct = () => {
-		try {
-			formik.setFieldValue('slotOfProducts', [
-				...formik.values.slotOfProducts,
-				'',
-			]);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-	const addAssignPeople = () => {
-		try {
-			formik.setFieldValue('assignPeople', [...formik.values.assignPeople, '']);
-		} catch (error) {
-			console.log(error);
-		}
-	};
+	// const addSlotOfProduct = () => {
+	// 	try {
+	// 		formik.setFieldValue('slotOfProducts', [
+	// 			...formik.values.slotOfProducts,
+	// 			'',
+	// 		]);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
+	// const addAssignPeople = () => {
+	// 	try {
+	// 		formik.setFieldValue('assignPeople', [...formik.values.assignPeople, '']);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
 
 	const handleBack = () => {
 		try {
@@ -133,7 +138,7 @@ function TestPo() {
 				>
 					<div className=" relative h-[40vh] rounded-md overflow-hidden flex mb-11">
 						<DropZone
-							onDrop={setPackingListFiles}
+							onDrop={SetPurchaseOrderFiles}
 							multiple={true}
 							message={'Upload Purchase Order'}
 						/>
@@ -160,15 +165,13 @@ function TestPo() {
 							<div className="flex-1">
 								<InputField
 									label="Address"
-									name="addOfFactory"
+									name="addOfBuyer"
 									type="text"
-									value={formik.values.addOfFactory}
+									value={formik.values.addOfBuyer}
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
-									error={
-										formik.touched.addOfFactory && formik.errors.addOfFactory
-									}
-									placeholder={'Address Of Factory'}
+									error={formik.touched.addOfBuyer && formik.errors.addOfBuyer}
+									placeholder={'Address Of Buyer'}
 									labelColor={'bg-white'}
 								/>
 							</div>
@@ -303,6 +306,7 @@ function TestPo() {
 					</div>
 
 					<button
+						type="button"
 						className=" flex justify-start items-center cursor-pointer pl-6 w-full gap-1 py-3 bg-[#1B9BEF1A] mb-4 "
 						// onClick={() => setPopup(!popup)}
 					>
@@ -312,10 +316,17 @@ function TestPo() {
 						</span>
 					</button>
 					<div className="flex justify-end gap-2 mb-6  ">
-						<button className="py-2 rounded-md px-11 border-2 border-[#1B9BEF] text-[#1B9BEF] font-bold ">
+						{/* <button
+							type="button"
+							className="py-2 rounded-md px-11 border-2 border-[#1B9BEF] text-[#1B9BEF] font-bold "
+						>
 							Save Draft
-						</button>
-						<button className="py-2 rounded-md px-11 bg-gray-300 font-bold text-white">
+						</button> */}
+						<button
+							type="submit"
+							className="py-2 rounded-md px-11 bg-gray-300 font-bold text-white"
+							onClick={() => console.log('test')}
+						>
 							Publish
 						</button>
 					</div>

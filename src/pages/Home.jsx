@@ -12,6 +12,15 @@ const Home = () => {
 		{id: 2, name: 'Factory', icon: factory, selected: false},
 		{id: 3, name: 'QC Agency', icon: QC, selected: false},
 	]);
+
+	const handleSubmit = () => {
+		// console.log(role);
+		// const data = role.find((item) => {
+		// 	console.log(item.selected);
+		// 	item.selected === true;
+		// });
+	};
+
 	return (
 		<div>
 			<div className=" h-screen w-3/4 m-auto ">

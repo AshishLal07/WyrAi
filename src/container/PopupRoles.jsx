@@ -103,7 +103,7 @@ const PopupRoles = ({setPopup}) => {
 					</div>
 					<button
 						onClick={() => handleSubmit()}
-						className="bg-blue py-[10px] px-[45px] rounded-md"
+						className="bg-blue text-white py-[10px] px-[45px] rounded-md"
 					>
 						save
 					</button>
